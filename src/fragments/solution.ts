@@ -1,4 +1,4 @@
-import { graphql } from '../graphql/gql'
+import { graphql } from "../graphql/gql.ts";
 
 export const Solution = graphql(`
   fragment Solution on Solution {
@@ -15,4 +15,4 @@ export const Solution = graphql(`
       }
     }
   }
-`)
+`);

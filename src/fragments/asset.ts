@@ -1,4 +1,4 @@
-import { graphql } from '../graphql/gql'
+import { graphql } from "../graphql/gql.ts";
 
 export const Asset = graphql(`
   fragment Asset on _Asset {
@@ -9,4 +9,4 @@ export const Asset = graphql(`
     type
     size
   }
-`)
+`);

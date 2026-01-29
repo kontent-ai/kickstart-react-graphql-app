@@ -1,4 +1,4 @@
-import { graphql } from '../graphql/gql'
+import { graphql } from "../graphql/gql.ts";
 
 export const GetLandingPageQuery = graphql(`
   query GetLandingPageQuery {
@@ -37,4 +37,4 @@ export const GetLandingPageQuery = graphql(`
       }
     }
   }
-`)
+`);

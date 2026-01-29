@@ -1,4 +1,4 @@
-import { graphql } from '../graphql/gql'
+import { graphql } from "../graphql/gql.ts";
 
 export const Video = graphql(`
   fragment Video on Video {
@@ -19,4 +19,4 @@ export const Video = graphql(`
         }
       }
   }
-`)
+`);

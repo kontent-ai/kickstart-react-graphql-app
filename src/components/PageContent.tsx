@@ -1,12 +1,15 @@
-import { FC } from "react";
-import Video from "./Video";
 import { transformToPortableText } from "@kontent-ai/rich-text-resolver";
-import { defaultPortableRichTextResolvers } from "../utils/richtext";
-import { PortableText, PortableTextReactResolvers } from "@kontent-ai/rich-text-resolver/utils/react";
-import { GetLandingPageQueryQuery } from "../graphql/graphql";
+import {
+  PortableText,
+  type PortableTextReactResolvers,
+} from "@kontent-ai/rich-text-resolver/utils/react";
+import type { FC } from "react";
+import type { GetLandingPageQueryQuery } from "../graphql/graphql.ts";
+import { defaultPortableRichTextResolvers } from "../utils/richtext.tsx";
+import Video from "./Video.tsx";
 
 type PageContentProps = {
-  body: GetLandingPageQueryQuery['landingPage_All']['items'][0]['bodyCopy'];
+  body: GetLandingPageQueryQuery["landingPage_All"]["items"][0]["bodyCopy"];
 };
 
 const PageContent: FC<PageContentProps> = ({ body }) => {
@@ -20,14 +23,16 @@ const PageContent: FC<PageContentProps> = ({ body }) => {
 };
 
 const createPortableTextComponents = (
-  element: GetLandingPageQueryQuery['landingPage_All']['items'][0]['bodyCopy'],
+  element: GetLandingPageQueryQuery["landingPage_All"]["items"][0]["bodyCopy"],
 ): PortableTextReactResolvers => ({
   ...defaultPortableRichTextResolvers,
   types: {
     componentOrItem: ({ value }) => {
-      const item = element.components.items.find(item => item._system_.codename === value.componentOrItem._ref);
+      const item = element.components.items.find(
+        (item) => item._system_.codename === value.componentOrItem._ref,
+      );
       if (!item) {
-        return <div>Did not find any item with codename {value.component._ref}</div>;
+        return <div>Did not find any item with codename {String(value.componentOrItem._ref)}</div>;
       }
 
       return <Video video={item} />;

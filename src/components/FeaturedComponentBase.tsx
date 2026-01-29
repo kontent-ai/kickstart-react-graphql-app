@@ -1,5 +1,5 @@
-import { FC, PropsWithChildren } from "react";
-import { AssetFragment } from "../graphql/graphql";
+import type { FC, PropsWithChildren } from "react";
+import type { AssetFragment } from "../graphql/graphql.ts";
 
 type FeaturedContentProps = PropsWithChildren<
   Readonly<{
@@ -12,7 +12,7 @@ const FeaturedComponentBase: FC<FeaturedContentProps> = ({ type, image, children
   return (
     <div className="flex flex-col gap-5 xl:gap-16 xl:flex-row py-5 xl:py-[104px] items-center">
       <div className="basis-1/3">
-        {image && (
+        {!!image && (
           <>
             <span className="px-3.5 py-1.5 absolute text-[12px] bg-azure text-white mt-4 ms-4 rounded-md font-bold">
               {type === "event" ? "FEATURED EVENT" : "FEATURED ARTICLE"}
@@ -27,9 +27,7 @@ const FeaturedComponentBase: FC<FeaturedContentProps> = ({ type, image, children
           </>
         )}
       </div>
-      <div className="basis-2/3 flex flex-col">
-        {children}
-      </div>
+      <div className="basis-2/3 flex flex-col">{children}</div>
     </div>
   );
 };
