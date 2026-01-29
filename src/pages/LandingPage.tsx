@@ -1,25 +1,23 @@
-import HeroImage from "../components/HeroImage";
-import PageContent from "../components/PageContent";
-import PageSection from "../components/PageSection";
+import HeroImage from "../components/HeroImage.tsx";
+import PageContent from "../components/PageContent.tsx";
+import PageSection from "../components/PageSection.tsx";
 import "../index.css";
 import { useQuery } from "@tanstack/react-query";
-import { FC } from "react";
-import FeaturedContent from "../components/FeaturedContent";
-import Layout from "../components/Layout";
-import SolutionList from "../components/SolutionListItem";
-import { execute } from "../graphql/execute";
-import { GetLandingPageQuery } from "../queries/getLandingPage";
-
+import type { FC } from "react";
+import FeaturedContent from "../components/FeaturedContent.tsx";
+import Layout from "../components/Layout.tsx";
+import SolutionList from "../components/SolutionListItem.tsx";
+import { execute } from "../graphql/execute.ts";
+import { GetLandingPageQuery } from "../queries/getLandingPage.ts";
 
 const LandingPage: FC = () => {
   const landingPage = useQuery({
     queryKey: ["landing_page"],
-    queryFn: () =>
-      execute(GetLandingPageQuery).then(res => {
-        return res.data.landingPage_All.items[0];
-      }),
-  })
-
+    queryFn: async () => {
+      const res = await execute(GetLandingPageQuery);
+      return res.data.landingPage_All.items[0];
+    },
+  });
 
   if (!landingPage.data) {
     return (
@@ -44,12 +42,12 @@ const LandingPage: FC = () => {
         <PageSection color="bg-white">
           <SolutionList />
         </PageSection>
-        {landingPage.data.bodyCopy && (
+        {!!landingPage.data.bodyCopy && (
           <PageSection color="bg-white">
             <PageContent body={landingPage.data.bodyCopy} />
           </PageSection>
         )}
-        {landingPage.data.featuredContent && (
+        {!!landingPage.data.featuredContent && (
           <FeaturedContent featuredContent={landingPage.data.featuredContent} />
         )}
       </div>

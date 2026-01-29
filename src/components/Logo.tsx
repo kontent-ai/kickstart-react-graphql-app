@@ -1,8 +1,9 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 const Logo: FC = () => (
   <div className="flex gap-4 items-center">
-    <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+    <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" aria-label="Karma Health Logo">
+      <title>Karma Health Logo</title>
       <rect width="40" height="14" y="13" fill="#993265" rx="2.4px" />
       <rect width="14" height="40" x="13" fill="#993265" rx="2.4px" />
     </svg>

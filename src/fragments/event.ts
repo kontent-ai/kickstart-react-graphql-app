@@ -1,4 +1,4 @@
-import { graphql } from '../graphql/gql'
+import { graphql } from "../graphql/gql.ts";
 
 export const Event = graphql(`
   fragment Event on Event {
@@ -41,4 +41,4 @@ export const Event = graphql(`
       value
     }
   }
-`)
+`);

@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { VideoFragment } from "../graphql/graphql";
+import type { FC } from "react";
+import type { VideoFragment } from "../graphql/graphql.ts";
 
 type VideoProps = {
   video: VideoFragment;
@@ -8,29 +8,28 @@ type VideoProps = {
 const Video: FC<VideoProps> = ({ video }) => {
   return (
     <div className="flex flex-col items-center">
-      {video.headline && (
+      {!!video.headline && (
         <h2 className="text-azure text-[40px] md:text-[64px] leading-[54px] w-2/4 text-center">
           {video.headline}
         </h2>
       )}
-      {video.description && (
-        <p className="w-4/6 text-center text-xl pt-6 text-gray">
-          {video.description}
-        </p>
+      {!!video.description && (
+        <p className="w-4/6 text-center text-xl pt-6 text-gray">{video.description}</p>
       )}
-      {video.videoLink && (
+      {!!video.videoLink && (
         <figure className="pt-20">
           <iframe
             className="m-auto w-full lg:w-[900px]"
             title={video.headline ?? "Video Title"}
             width={900}
             height={590}
-            src={`${video.videoLink}${video.autoplay?.items[0]?._system_.codename === "true" ? "&autoplay=1&mute=1" : ""
-              }`}
+            src={`${video.videoLink}${
+              video.autoplay?.items[0]?._system_.codename === "true" ? "&autoplay=1&mute=1" : ""
+            }`}
             referrerPolicy="strict-origin-when-cross-origin"
-            allow={"autoplay"}
+            allow="autoplay"
           />
-          {video.caption && (
+          {!!video.caption && (
             <figcaption className="text-gray-light block m-auto w-fit text-xl pt-6">
               {video.caption}
             </figcaption>

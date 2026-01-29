@@ -1,4 +1,4 @@
-import { graphql } from '../graphql/gql'
+import { graphql } from "../graphql/gql.ts";
 
 export const GetSolutionsQuery = graphql(`
   query GetSolutionsQuery {
@@ -8,4 +8,4 @@ export const GetSolutionsQuery = graphql(`
       }
     }
   }
-`)
+`);

@@ -5,8 +5,12 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends " $fragmentName" | "__typename" ? T[P] : never };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = {
+  [_ in K]?: never;
+};
+export type Incremental<T> =
+  | T
+  | { [P in keyof T]?: P extends " $fragmentName" | "__typename" ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string };
@@ -837,22 +841,22 @@ export type ArticleFragment = {
   introduction: string;
   _system_: { __typename: "_Sys"; id: string; codename: string };
   bodyCopy: { __typename: "_RichText"; html: string };
-  publishDate_with_timezone?:
-    | { __typename: "_DateAndTime"; display_timezone?: string | null; value?: string | null }
-    | null;
+  publishDate_with_timezone?: {
+    __typename: "_DateAndTime";
+    display_timezone?: string | null;
+    value?: string | null;
+  } | null;
   image: {
     __typename: "_AssetCollection";
-    items: Array<
-      {
-        __typename: "_Asset";
-        url: string;
-        description?: string | null;
-        width?: number | null;
-        height?: number | null;
-        type?: string | null;
-        size?: number | null;
-      }
-    >;
+    items: Array<{
+      __typename: "_Asset";
+      url: string;
+      description?: string | null;
+      width?: number | null;
+      height?: number | null;
+      type?: string | null;
+      size?: number | null;
+    }>;
   };
 };
 
@@ -871,38 +875,42 @@ export type EventFragment = {
   name: string;
   _system_: { __typename: "_Sys"; id: string; codename: string };
   description: { __typename: "_RichText"; html: string };
-  startDate_with_timezone?:
-    | { __typename: "_DateAndTime"; display_timezone?: string | null; value?: string | null }
-    | null;
+  startDate_with_timezone?: {
+    __typename: "_DateAndTime";
+    display_timezone?: string | null;
+    value?: string | null;
+  } | null;
   image: {
     __typename: "_AssetCollection";
-    items: Array<
-      {
-        __typename: "_Asset";
-        url: string;
-        description?: string | null;
-        width?: number | null;
-        height?: number | null;
-        type?: string | null;
-        size?: number | null;
-      }
-    >;
+    items: Array<{
+      __typename: "_Asset";
+      url: string;
+      description?: string | null;
+      width?: number | null;
+      height?: number | null;
+      type?: string | null;
+      size?: number | null;
+    }>;
   };
   eventTopic: {
     __typename: "_TaxonomyTermCollection";
-    items: Array<
-      { __typename: "_TaxonomyTerm"; _system_: { __typename: "_TaxonomyTermSys"; codename: string; name: string } }
-    >;
+    items: Array<{
+      __typename: "_TaxonomyTerm";
+      _system_: { __typename: "_TaxonomyTermSys"; codename: string; name: string };
+    }>;
   };
   eventType: {
     __typename: "_TaxonomyTermCollection";
-    items: Array<
-      { __typename: "_TaxonomyTerm"; _system_: { __typename: "_TaxonomyTermSys"; codename: string; name: string } }
-    >;
+    items: Array<{
+      __typename: "_TaxonomyTerm";
+      _system_: { __typename: "_TaxonomyTermSys"; codename: string; name: string };
+    }>;
   };
-  endDate_with_timezone?:
-    | { __typename: "_DateAndTime"; display_timezone?: string | null; value?: string | null }
-    | null;
+  endDate_with_timezone?: {
+    __typename: "_DateAndTime";
+    display_timezone?: string | null;
+    value?: string | null;
+  } | null;
 };
 
 export type SolutionFragment = {
@@ -912,17 +920,15 @@ export type SolutionFragment = {
   _system_: { __typename: "_Sys"; id: string; codename: string };
   image: {
     __typename: "_AssetCollection";
-    items: Array<
-      {
-        __typename: "_Asset";
-        url: string;
-        description?: string | null;
-        width?: number | null;
-        height?: number | null;
-        type?: string | null;
-        size?: number | null;
-      }
-    >;
+    items: Array<{
+      __typename: "_Asset";
+      url: string;
+      description?: string | null;
+      width?: number | null;
+      height?: number | null;
+      type?: string | null;
+      size?: number | null;
+    }>;
   };
 };
 
@@ -935,12 +941,10 @@ export type VideoFragment = {
   _system_: { __typename: "_Sys"; id: string; codename: string };
   autoplay: {
     __typename: "_MultipleChoiceOptionCollection";
-    items: Array<
-      {
-        __typename: "_MultipleChoiceOption";
-        _system_: { __typename: "_MultipleChoiceOptionSys"; codename: string; name: string };
-      }
-    >;
+    items: Array<{
+      __typename: "_MultipleChoiceOption";
+      _system_: { __typename: "_MultipleChoiceOptionSys"; codename: string; name: string };
+    }>;
   };
 };
 
@@ -950,56 +954,53 @@ export type GetLandingPageQueryQuery = {
   __typename: "_RootQuery";
   landingPage_All: {
     __typename: "LandingPage_All";
-    items: Array<
-      {
-        __typename: "LandingPage";
-        headline: string;
-        subheadline: string;
-        _system_: { __typename: "_Sys"; id: string; name: string; codename: string };
-        heroImage: {
-          __typename: "_AssetCollection";
-          items: Array<
-            {
-              __typename: "_Asset";
-              url: string;
-              description?: string | null;
-              width?: number | null;
-              height?: number | null;
-              type?: string | null;
-              size?: number | null;
-            }
-          >;
-        };
-        bodyCopy: {
-          __typename: "LandingPage_BodyCopy";
-          html: string;
-          components: {
-            __typename: "LandingPage_BodyCopy_Components_Collection";
-            items: Array<
-              {
-                __typename: "Video";
-                headline: string;
-                description: string;
-                videoLink: string;
-                caption: string;
-                _system_: { __typename: "_Sys"; id: string; codename: string };
-                autoplay: {
-                  __typename: "_MultipleChoiceOptionCollection";
-                  items: Array<
-                    {
-                      __typename: "_MultipleChoiceOption";
-                      _system_: { __typename: "_MultipleChoiceOptionSys"; codename: string; name: string };
-                    }
-                  >;
+    items: Array<{
+      __typename: "LandingPage";
+      headline: string;
+      subheadline: string;
+      _system_: { __typename: "_Sys"; id: string; name: string; codename: string };
+      heroImage: {
+        __typename: "_AssetCollection";
+        items: Array<{
+          __typename: "_Asset";
+          url: string;
+          description?: string | null;
+          width?: number | null;
+          height?: number | null;
+          type?: string | null;
+          size?: number | null;
+        }>;
+      };
+      bodyCopy: {
+        __typename: "LandingPage_BodyCopy";
+        html: string;
+        components: {
+          __typename: "LandingPage_BodyCopy_Components_Collection";
+          items: Array<{
+            __typename: "Video";
+            headline: string;
+            description: string;
+            videoLink: string;
+            caption: string;
+            _system_: { __typename: "_Sys"; id: string; codename: string };
+            autoplay: {
+              __typename: "_MultipleChoiceOptionCollection";
+              items: Array<{
+                __typename: "_MultipleChoiceOption";
+                _system_: {
+                  __typename: "_MultipleChoiceOptionSys";
+                  codename: string;
+                  name: string;
                 };
-              }
-            >;
-          };
+              }>;
+            };
+          }>;
         };
-        featuredContent: {
-          __typename: "LandingPage_FeaturedContent_Collection";
-          items: Array<
-            {
+      };
+      featuredContent: {
+        __typename: "LandingPage_FeaturedContent_Collection";
+        items: Array<
+          | {
               __typename: "Article";
               title: string;
               introduction: string;
@@ -1012,19 +1013,18 @@ export type GetLandingPageQueryQuery = {
               } | null;
               image: {
                 __typename: "_AssetCollection";
-                items: Array<
-                  {
-                    __typename: "_Asset";
-                    url: string;
-                    description?: string | null;
-                    width?: number | null;
-                    height?: number | null;
-                    type?: string | null;
-                    size?: number | null;
-                  }
-                >;
+                items: Array<{
+                  __typename: "_Asset";
+                  url: string;
+                  description?: string | null;
+                  width?: number | null;
+                  height?: number | null;
+                  type?: string | null;
+                  size?: number | null;
+                }>;
               };
-            } | {
+            }
+          | {
               __typename: "Event";
               name: string;
               _system_: { __typename: "_Sys"; id: string; codename: string };
@@ -1036,35 +1036,29 @@ export type GetLandingPageQueryQuery = {
               } | null;
               image: {
                 __typename: "_AssetCollection";
-                items: Array<
-                  {
-                    __typename: "_Asset";
-                    url: string;
-                    description?: string | null;
-                    width?: number | null;
-                    height?: number | null;
-                    type?: string | null;
-                    size?: number | null;
-                  }
-                >;
+                items: Array<{
+                  __typename: "_Asset";
+                  url: string;
+                  description?: string | null;
+                  width?: number | null;
+                  height?: number | null;
+                  type?: string | null;
+                  size?: number | null;
+                }>;
               };
               eventTopic: {
                 __typename: "_TaxonomyTermCollection";
-                items: Array<
-                  {
-                    __typename: "_TaxonomyTerm";
-                    _system_: { __typename: "_TaxonomyTermSys"; codename: string; name: string };
-                  }
-                >;
+                items: Array<{
+                  __typename: "_TaxonomyTerm";
+                  _system_: { __typename: "_TaxonomyTermSys"; codename: string; name: string };
+                }>;
               };
               eventType: {
                 __typename: "_TaxonomyTermCollection";
-                items: Array<
-                  {
-                    __typename: "_TaxonomyTerm";
-                    _system_: { __typename: "_TaxonomyTermSys"; codename: string; name: string };
-                  }
-                >;
+                items: Array<{
+                  __typename: "_TaxonomyTerm";
+                  _system_: { __typename: "_TaxonomyTermSys"; codename: string; name: string };
+                }>;
               };
               endDate_with_timezone?: {
                 __typename: "_DateAndTime";
@@ -1072,10 +1066,9 @@ export type GetLandingPageQueryQuery = {
                 value?: string | null;
               } | null;
             }
-          >;
-        };
-      }
-    >;
+        >;
+      };
+    }>;
   };
 };
 
@@ -1085,33 +1078,31 @@ export type GetSolutionsQueryQuery = {
   __typename: "_RootQuery";
   solution_All: {
     __typename: "Solution_All";
-    items: Array<
-      {
-        __typename: "Solution";
-        headline: string;
-        introduction: string;
-        _system_: { __typename: "_Sys"; id: string; codename: string };
-        image: {
-          __typename: "_AssetCollection";
-          items: Array<
-            {
-              __typename: "_Asset";
-              url: string;
-              description?: string | null;
-              width?: number | null;
-              height?: number | null;
-              type?: string | null;
-              size?: number | null;
-            }
-          >;
-        };
-      }
-    >;
+    items: Array<{
+      __typename: "Solution";
+      headline: string;
+      introduction: string;
+      _system_: { __typename: "_Sys"; id: string; codename: string };
+      image: {
+        __typename: "_AssetCollection";
+        items: Array<{
+          __typename: "_Asset";
+          url: string;
+          description?: string | null;
+          width?: number | null;
+          height?: number | null;
+          type?: string | null;
+          size?: number | null;
+        }>;
+      };
+    }>;
   };
 };
 
-export class TypedDocumentString<TResult, TVariables> extends String
-  implements DocumentTypeDecoration<TResult, TVariables> {
+export class TypedDocumentString<TResult, TVariables>
+  extends String
+  implements DocumentTypeDecoration<TResult, TVariables>
+{
   __apiType?: NonNullable<DocumentTypeDecoration<TResult, TVariables>["__apiType"]>;
   private value: string;
   public __meta__?: Record<string, any> | undefined;
